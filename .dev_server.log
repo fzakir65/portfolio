@@ -1,0 +1,16 @@
+
+> developer-portfolio@0.1.0 dev
+> next dev
+
+   ▲ Next.js 15.1.1
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.252.1:3000
+
+ ✓ Starting...
+ ✓ Ready in 2.9s
+ ○ Compiling / ...
+Browserslist: caniuse-lite is outdated. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+ ✓ Compiled / in 30.2s (931 modules)
+ ✓ Compiled in 2.6s (387 modules)
