@@ -1,19 +1,36 @@
 "use client"
 
-import Lottie from "lottie-react";
+import { useEffect, useState } from "react";
 
+// Dynamically import lottie-react on the client to avoid referencing
+// browser globals during server-side prerender which causes
+// "document is not defined" on Netlify builds.
 const AnimationLottie = ({ animationPath, width }) => {
-  const defaultOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: animationPath,
-    style: {
-      width: '95%',
-    }
-  };
+  const [Lottie, setLottie] = useState(null);
+
+  useEffect(() => {
+    let mounted = true;
+    import('lottie-react')
+      .then((mod) => {
+        if (mounted) setLottie(() => mod.default || mod);
+      })
+      .catch(() => {
+        // If loading fails, swallow the error so build doesn't fail.
+      });
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  if (!Lottie) return null;
 
   return (
-    <Lottie {...defaultOptions} />
+    <Lottie
+      loop
+      autoplay
+      animationData={animationPath}
+      style={{ width: width || '95%' }}
+    />
   );
 };
 
